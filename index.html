@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of a mathematics educator, ICT enthusiast, and multimedia creative.">
+  <title>My Portfolio | Salted Multimedia</title>
+  <style>
+    :root {
+      --navy: #101a35;
+      --blue: #2349a5;
+      --gold: #f2b84b;
+      --ink: #20283b;
+      --muted: #687187;
+      --paper: #f6f8fc;
+      --white: #ffffff;
+      --line: #e4e8f1;
+      --radius: 18px;
+      --shadow: 0 14px 40px rgba(16, 26, 53, .09);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .container { width: min(1100px, calc(100% - 40px)); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(228,232,241,.85);
+    }
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { font-weight: 850; letter-spacing: -.5px; color: var(--navy); font-size: 1.15rem; }
+    .brand span { color: var(--blue); }
+    .nav-links { display: flex; gap: 24px; align-items: center; font-size: .92rem; font-weight: 650; }
+    .nav-links a:hover { color: var(--blue); }
+    .menu-toggle { display: none; border: 0; background: transparent; font-size: 1.6rem; cursor: pointer; color: var(--navy); }
+    .hero {
+      overflow: hidden; position: relative; color: white;
+      background: radial-gradient(circle at 85% 20%, rgba(242,184,75,.25), transparent 28%),
+                  linear-gradient(125deg, #101a35 0%, #1c3470 65%, #2349a5 100%);
+      padding: 94px 0 88px;
+    }
+    .hero::after {
+      content: ""; position: absolute; width: 360px; height: 360px; border: 1px solid rgba(255,255,255,.13);
+      border-radius: 50%; right: -110px; bottom: -210px; box-shadow: 0 0 0 35px rgba(255,255,255,.035), 0 0 0 75px rgba(255,255,255,.025);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.45fr .75fr; gap: 55px; align-items: center; position: relative; z-index: 1; }
+    .eyebrow { text-transform: uppercase; letter-spacing: 2.4px; font-size: .76rem; font-weight: 800; color: var(--gold); }
+    h1 { margin: 12px 0 18px; font-size: clamp(2.5rem, 6vw, 4.6rem); line-height: 1.07; letter-spacing: -2px; }
+    .hero p { color: #e0e7ff; max-width: 650px; font-size: 1.08rem; margin: 0 0 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; padding: 12px 20px; font-weight: 750; border: 1px solid transparent; transition: transform .2s, background .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-gold { background: var(--gold); color: var(--navy); }
+    .btn-outline { color: white; border-color: rgba(255,255,255,.5); }
+    .profile-card { padding: 26px; border: 1px solid rgba(255,255,255,.18); border-radius: 24px; background: rgba(255,255,255,.08); backdrop-filter: blur(8px); }
+    .profile-mark { width: 88px; height: 88px; border-radius: 24px; display: grid; place-items: center; background: var(--gold); color: var(--navy); font-size: 2rem; font-weight: 900; margin-bottom: 18px; }
+    .profile-card h2 { margin: 0 0 6px; font-size: 1.2rem; }
+    .profile-card p { font-size: .92rem; margin: 0; }
+    .profile-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+    .profile-tags span { font-size: .76rem; border-radius: 99px; background: rgba(255,255,255,.12); padding: 5px 9px; }
+    section { padding: 78px 0; }
+    .section-heading { margin-bottom: 32px; max-width: 680px; }
+    .section-heading .eyebrow { color: var(--blue); }
+    h2.section-title { color: var(--navy); font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.2; letter-spacing: -.8px; margin: 7px 0 12px; }
+    .section-heading p { color: var(--muted); margin: 0; }
+    .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 34px; align-items: start; }
+    .about-copy p { color: var(--muted); margin-top: 0; }
+    .highlight-box { background: white; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .highlight-box h3 { margin: 0 0 12px; color: var(--navy); }
+    .highlight-list { list-style: none; padding: 0; margin: 0; }
+    .highlight-list li { padding: 9px 0; border-bottom: 1px solid var(--line); }
+    .highlight-list li:last-child { border-bottom: 0; }
+    .highlight-list li::before { content: "✓"; color: var(--blue); font-weight: 900; margin-right: 10px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { background: white; border: 1px solid var(--line); border-radius: var(--radius); padding: 25px; box-shadow: 0 8px 28px rgba(16,26,53,.04); transition: transform .2s, box-shadow .2s; }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .card-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: #edf1ff; font-size: 1.45rem; margin-bottom: 17px; }
+    .card h3 { color: var(--navy); margin: 0 0 8px; font-size: 1.12rem; }
+    .card p { color: var(--muted); font-size: .94rem; margin: 0; }
+    .skills-wrap { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill { border: 1px solid #dce3f6; background: white; padding: 9px 14px; border-radius: 99px; font-size: .9rem; font-weight: 650; color: #33456e; }
+    .project-card { display: flex; flex-direction: column; min-height: 100%; }
+    .project-top { height: 112px; border-radius: 13px; margin-bottom: 18px; display: grid; place-items: center; font-size: 2.3rem; color: white; background: linear-gradient(135deg, #15254b, #4168c9); }
+    .project-card:nth-child(2) .project-top { background: linear-gradient(135deg, #80571c, #efb64c); }
+    .project-card:nth-child(3) .project-top { background: linear-gradient(135deg, #174e48, #4ba99b); }
+    .project-card .project-type { color: var(--blue); font-size: .75rem; font-weight: 850; text-transform: uppercase; letter-spacing: 1px; }
+    .project-card h3 { margin-top: 5px; }
+    .project-card .text-link { margin-top: auto; padding-top: 16px; color: var(--blue); font-weight: 800; }
+    .contact { background: var(--navy); color: white; }
+    .contact .section-title { color: white; }
+    .contact .section-heading p { color: #cbd5f5; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 35px; align-items: start; }
+    .contact-details { display: grid; gap: 12px; }
+    .contact-item { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.13); border-radius: 13px; padding: 15px 17px; }
+    .contact-item small { display: block; color: #bdc9ef; margin-bottom: 3px; }
+    .contact-item a { overflow-wrap: anywhere; }
+    .contact-note { color: #cbd5f5; font-size: .93rem; }
+    footer { background: #0b1227; color: #aeb9da; padding: 20px 0; font-size: .86rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+    .back-top { color: var(--gold); font-weight: 700; }
+    @media (max-width: 800px) {
+      .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero { padding: 68px 0; }
+      .hero-grid { gap: 30px; }
+      .profile-card { max-width: 460px; }
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      section { padding: 60px 0; }
+    }
+    @media (max-width: 560px) {
+      .container { width: min(100% - 30px, 1100px); }
+      .menu-toggle { display: block; }
+      .nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; padding: 18px 22px 22px; background: white; border-bottom: 1px solid var(--line); flex-direction: column; align-items: flex-start; gap: 14px; }
+      .nav-links.open { display: flex; }
+      .cards { grid-template-columns: 1fr; }
+      h1 { letter-spacing: -1.2px; }
+      .hero-actions .btn { width: 100%; }
+      .footer-inner { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home">MY<span>PORTFOLIO</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#services">What I Do</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Educator · Technologist · Creative</div>
+          <h1>Ideas, learning<br>and creativity —<br><span style="color:var(--gold)">made meaningful.</span></h1>
+          <p>I’m a mathematics educator with an interest in ICT, educational technology, app development, photography and video production. I enjoy turning ideas into practical learning experiences and creative digital work.</p>
+          <div class="hero-actions">
+            <a class="btn btn-gold" href="#projects">Explore My Work <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-outline" href="#contact">Get in Touch</a>
+          </div>
+        </div>
+        <aside class="profile-card" aria-label="Professional summary">
+          <div class="profile-mark">SM</div>
+          <h2>Salted Multimedia</h2>
+          <p>Elegance and Beauty — with a passion for education, technology and visual storytelling.</p>
+          <div class="profile-tags">
+            <span>Mathematics Education</span><span>ICT</span><span>Photography</span><span>Digital Learning</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">A little about me</div>
+          <h2 class="section-title">Bringing education and technology together.</h2>
+          <p>A practical, curious professional who enjoys helping people learn and communicating ideas through technology and creativity.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-copy">
+            <p>My background combines mathematics education and information and communication technology. As an educator, I aim to make complex ideas easier to understand through clear explanations, useful resources and student-centred learning.</p>
+            <p>Beyond the classroom, I explore digital tools, mobile app development and multimedia production. I’m especially interested in using technology to make educational content more accessible, engaging and useful.</p>
+            <p>This portfolio is a snapshot of my interests and work. It can be updated with real project links, photographs, certificates and professional achievements.</p>
+          </div>
+          <div class="highlight-box">
+            <h3>Professional focus</h3>
+            <ul class="highlight-list">
+              <li>Mathematics teaching and learning resources</li>
+              <li>ICT and educational technology</li>
+              <li>Mobile app and digital content development</li>
+              <li>Photography and videography</li>
+              <li>Creative problem-solving and continuous learning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" style="background:#fff">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">What I do</div>
+          <h2 class="section-title">A blend of teaching, tech and creativity.</h2>
+          <p>Areas where I build skills, create value and support people and organisations.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">📐</div>
+            <h3>Mathematics Education</h3>
+            <p>Lesson resources, worksheets, worked solutions and student-friendly explanations for mathematics learning.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">💻</div>
+            <h3>ICT & EdTech</h3>
+            <p>Digital learning resources, practical technology support and ideas for making education more accessible.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">📱</div>
+            <h3>App Development</h3>
+            <p>Exploring Flutter and web technologies to create useful digital tools and educational applications.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">📸</div>
+            <h3>Photography</h3>
+            <p>Portraits, events and visual storytelling with attention to natural skin tones, lighting and detail.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">🎬</div>
+            <h3>Video Production</h3>
+            <p>Video editing and multimedia content for events, education and digital platforms.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">🛡️</div>
+            <h3>Digital Responsibility</h3>
+            <p>An interest in data protection, responsible technology use and building trust in digital environments.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Tools & capabilities</div>
+          <h2 class="section-title">Skills I’m building and applying.</h2>
+          <p>This list is editable. Keep the skills that reflect your current confidence and experience.</p>
+        </div>
+        <div class="skills-wrap">
+          <span class="skill">Mathematics Teaching</span>
+          <span class="skill">Microsoft Word</span>
+          <span class="skill">Microsoft Excel</span>
+          <span class="skill">PowerPoint</span>
+          <span class="skill">HTML & CSS</span>
+          <span class="skill">Flutter</span>
+          <span class="skill">Visual Basic</span>
+          <span class="skill">Introductory Java</span>
+          <span class="skill">Educational Content</span>
+          <span class="skill">Photography</span>
+          <span class="skill">Photo Editing</span>
+          <span class="skill">Video Editing</span>
+          <span class="skill">Digital Content Creation</span>
+          <span class="skill">Data Protection Awareness</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" style="background:#fff">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Selected work</div>
+          <h2 class="section-title">Projects and creative interests.</h2>
+          <p>Use these starter project cards to introduce your actual work. Replace the descriptions and add links when ready.</p>
+        </div>
+        <div class="cards">
+          <article class="card project-card">
+            <div class="project-top" aria-hidden="true">📚</div>
+            <div class="project-type">Educational Technology</div>
+            <h3>Nufiala Learning App</h3>
+            <p>A digital learning concept designed to organise educational resources and make learning materials easier to access.</p>
+            <a class="text-link" href="#contact">Ask about this project ↗</a>
+          </article>
+          <article class="card project-card">
+            <div class="project-top" aria-hidden="true">📷</div>
+            <div class="project-type">Creative Media</div>
+            <h3>Salted Multimedia</h3>
+            <p>Photography, videography and visual content created with a focus on thoughtful composition and polished presentation.</p>
+            <a class="text-link" href="#contact">Discuss a project ↗</a>
+          </article>
+          <article class="card project-card">
+            <div class="project-top" aria-hidden="true">✏️</div>
+            <div class="project-type">Teaching Resources</div>
+            <h3>Mathematics Learning Materials</h3>
+            <p>Student-friendly notes, practice questions, diagrams and step-by-step solutions for mathematics topics.</p>
+            <a class="text-link" href="#contact">Request information ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Let’s connect</div>
+          <h2 class="section-title">Have a project or an idea?</h2>
+          <p>I’m open to professional connections, educational collaborations and creative projects.</p>
+        </div>
+        <div class="contact-grid">
+          <div>
+            <p class="contact-note">Replace or confirm the contact details below before publishing this page. You can also add links to your LinkedIn, GitHub, YouTube or photography gallery.</p>
+            <a class="btn btn-gold" href="mailto:st.moranzy4g@live.com">Email Me ↗</a>
+          </div>
+          <div class="contact-details">
+            <div class="contact-item"><small>Email</small><a href="mailto:st.moranzy4g@live.com">st.moranzy4g@live.com</a></div>
+            <div class="contact-item"><small>Location</small><span>Ghana</span></div>
+            <div class="contact-item"><small>Professional brand</small><span>Salted Multimedia</span></div>
+            <!-- Add your preferred public phone number and social links here. -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Salted Multimedia. All rights reserved.</span>
+      <a class="back-top" href="#home">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.textContent = isOpen ? '✕' : '☰';
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.textContent = '☰';
+      });
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
